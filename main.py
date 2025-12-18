@@ -81,7 +81,7 @@ def prediction(x: str, a: Arbre) -> list[str] | str:
 
             correct = []
             for k in enfants:
-                if plus_long_prefique_commun(x, k[0]) == x:
+                if plus_long_prefique_commun(x, k[0]) == x and k[0] != x:
                     correct.append(k[0])
 
             if correct != []:
@@ -90,10 +90,10 @@ def prediction(x: str, a: Arbre) -> list[str] | str:
             else:
                 for k in enfants:
                     rendu = prediction(x, k)
-                    if rendu != "ya pas":
+                    if rendu != "Pas possible":
                         return rendu
                     
-                return "ya pas"
+                return "Pas possible"
 
 
 assert prediction("abr", a_pref_rec) == ["abruti", "abri"]
@@ -103,5 +103,5 @@ assert prediction("abr", a_pref_rec) == ["abruti", "abri"]
 arb: Arbre = ()
 for i, mot in enumerate(data):
     arb = ajouter(mot, arb)
-    if i % 200 == 0:
+    if i % 500 == 0:
         print(f"{i} mots ajoutés")
